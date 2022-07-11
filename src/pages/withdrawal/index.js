@@ -85,9 +85,9 @@ const Withdrawal = () => {
         },
         {
             label: 'Change Status',
-            render: (row, id) =>{//disabled={row.status !== 'initiated'}
+            render: (row, id) =>{
                 return(
-                    <IconButton  color="primary" aria-label="upload picture" component="span" key={id} onClick={(e)=>handleClick(e, row)}>
+                    <IconButton disabled={row.status !== 'initiated'}  color="primary" aria-label="upload picture" component="span" key={id} onClick={(e)=>handleClick(e, row)}>
                         <DriveFileRenameOutlineIcon />
                     </IconButton>
                 )
