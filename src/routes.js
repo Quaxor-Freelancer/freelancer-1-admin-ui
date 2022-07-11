@@ -8,6 +8,7 @@ import AuthenticationLayout from "./components/layout/AuthenticationLayout";
 //pages
 import SignIn from "./pages/authentication/SignIn";
 import SignUp from "./pages/authentication/SignUp";
+import Withdrawal from "./pages/withdrawal";
 
 const Routes = () => {
     let router = useRoutes([
@@ -18,6 +19,10 @@ const Routes = () => {
                 {
                     path: "dashboard",
                     element:<>Dashboard</>,
+                },
+                {
+                    path: "withdrawal",
+                    element:<Withdrawal />,
                 },
             ],
         },

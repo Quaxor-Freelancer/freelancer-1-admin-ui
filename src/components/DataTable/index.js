@@ -162,19 +162,20 @@ export default function DataTable(
                                                     column.fieldRenderType === 'status' ? 
                                                         <Chip
                                                             label={
-                                                                row[column.name] &&
-                                                                (row[column.name])
+                                                                row['status'] &&
+                                                                (row['status'])
                                                             }
+                                                            key={dataIndex}
                                                             variant="outlined"
                                                             style={{
                                                                 width: "100%",
                                                                 border: "none",
                                                                 backgroundColor:
-                                                                row[column.name] === "New"
-                                                                    ? "#66a103"
-                                                                    : row[column.name] === "Close"
-                                                                    ? "red"
-                                                                    : "orange",
+                                                                    row['status'] === "initiated"
+                                                                        ? "orange"
+                                                                        : row['status'] === "accecpted"
+                                                                        ? "green"
+                                                                        : 'red',
                                                                 color: "#FFF",
                                                             }}
                                                         />
