@@ -222,7 +222,7 @@ export default function NavBar({ drawerWidth, handleDrawerToggle }) {
 				}}
 			>
 				<Toolbar>
-					{!mobileScreen &&
+
 						<IconButton
 							color="inherit"
 							aria-label="open drawer"
@@ -232,7 +232,7 @@ export default function NavBar({ drawerWidth, handleDrawerToggle }) {
 							sx={{ mr: 2, display: { sm: 'none' } }}
 						>
 							<MenuIcon />
-						</IconButton>}
+						</IconButton>
 					{/* <Typography
 						variant="h6"
 						noWrap

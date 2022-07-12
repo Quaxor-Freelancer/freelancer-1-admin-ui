@@ -11,6 +11,7 @@ import SignUp from "./pages/authentication/SignUp";
 import Users from "./pages/users/Users";
 import User from "./pages/User/User";
 import EditUser from "./pages/User/EditUser";
+import Withdrawal from "./pages/withdrawal";
 
 const Routes = () => {
     let router = useRoutes([
@@ -33,6 +34,10 @@ const Routes = () => {
                 {
                     path: "users/edit/:userId",
                     element:<EditUser />,
+                },
+                {
+                    path: "withdrawal",
+                    element:<Withdrawal />,
                 },
             ],
         },

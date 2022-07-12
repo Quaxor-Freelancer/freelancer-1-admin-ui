@@ -10,7 +10,8 @@ const useFetch = (url) => {
     useEffect(() => {
         if (!url) return
         const abortCont = new AbortController();
-        customFetch(url, { signal: abortCont.signal })
+        // customFetch(url, { signal: abortCont.signal })
+        fetch(process.env.REACT_APP_API_HOST+url, {method:'GET'})
             .then(res => {
                 if (res.status !== 200 && res.status !== 304) {
                     throw Error('could not fetch data')
