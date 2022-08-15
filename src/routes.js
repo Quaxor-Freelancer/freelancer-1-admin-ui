@@ -7,7 +7,6 @@ import AuthenticationLayout from "./components/layout/AuthenticationLayout";
 
 //pages
 import SignIn from "./pages/authentication/SignIn";
-import SignUp from "./pages/authentication/SignUp";
 import Users from "./pages/users/Users";
 import User from "./pages/User/User";
 import EditUser from "./pages/User/EditUser";
@@ -20,29 +19,25 @@ const Routes = () => {
             element: <HomeLayout />,
             children: [
                 {
-                    path: "dashboard",
-                    element:<>Dashboard</>,
-                },
-                {
                     path: "users",
-                    element:<Users />,
+                    element: <Users />,
                 },
                 {
                     path: "users/:userId",
-                    element:<User />,
+                    element: <User />,
                 },
                 {
                     path: "users/edit/:userId",
-                    element:<EditUser />,
+                    element: <EditUser />,
                 },
                 {
                     path: "withdrawal",
-                    element:<Withdrawal />,
+                    element: <Withdrawal />,
                 },
             ],
         },
-        { path: "/", element: <Navigate to="dashboard" /> },
-        { path: "*", element: <Navigate to="dashboard" /> },
+        { path: "/", element: <Navigate to="users" /> },
+        { path: "*", element: <Navigate to="users" /> },
     ]);
 
     return router;
@@ -57,11 +52,7 @@ const AuthRoutes = () => {
                 {
                     path: "signin",
                     element: <SignIn />,
-                },
-                {
-                    path: "signup",
-                    element: <SignUp />
-                },
+                }
             ],
         },
         { path: "/", element: <Navigate to="/auth/signin" /> },

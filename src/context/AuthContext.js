@@ -37,6 +37,9 @@ export function AuthProvider({ children }) {
         if (token) {
             // setIsLoading(true);
             if (checkTokenValidity(token)) {
+                setLoginStatus(true)
+                setIsLoading(false)
+                return
                 fetch(process.env.REACT_APP_API_HOST + '/user/me', {
                     method: 'GET',
                     headers: { "Authorization": "Bearer " + token },
@@ -127,7 +130,6 @@ export function AuthProvider({ children }) {
                 setUser(data.user)
                 setToken(data.accessToken)
                 localStorage.setItem('refreshToken', data.refreshToken)
-                localStorage.setItem('streamToken', data.streamToken)
                 // toastMessage("Logged in successfully")
                 // }
                 return () => {
@@ -195,6 +197,7 @@ export function AuthProvider({ children }) {
     }
 
     function checkTokenValidity(token) {
+        if (!token) return false
         let decodedToken = jwt_decode(token);
         let currentDate = new Date();
 

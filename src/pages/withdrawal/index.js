@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import DataTable from '../../components/DataTable'
 import useFetch from '../../hooks/useFetch'
-import { Chip, IconButton } from '@mui/material'
+import { Chip, IconButton, Typography } from '@mui/material'
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -17,10 +17,10 @@ const Withdrawal = () => {
     const [rows, setRows] = useState([])
     const [successMsg, setSuccessMsg] = useState('')
 
-    useEffect(()=>{setRows(withdrawals)},[withdrawals])
+    useEffect(() => { setRows(withdrawals) }, [withdrawals])
 
     const [status, setStatus] = useState({})
-    const {customFetch} = useAuth()
+    const { customFetch } = useAuth()
     const [data, setData] = useState({})
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -33,11 +33,29 @@ const Withdrawal = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    
+
     const columns = [
         {
-            name: 'userName',
-            label: 'Name'
+            name: 'name',
+            label: 'Name',
+            render: row => `${row.user.firstname} ${row.user.lastname}`
+        },
+        {
+            name: 'bank',
+            label: 'Bank Details',
+            render: row => (
+                <>
+                    <Typography variant="body2" component="h2">
+                        <b>Bank Name</b> {row.user.bankname}
+                    </Typography>
+                    <Typography variant="body2" component="h2">
+                        <b>Account Name</b> {row.user.accountname}
+                    </Typography>
+                    <Typography variant="body2" component="h2">
+                        <b>Account Number</b> {row.user.accountnumber}
+                    </Typography>
+                </>
+            )
         },
         {
             name: 'userPhone',
@@ -48,7 +66,7 @@ const Withdrawal = () => {
             label: 'Email'
         },
         {
-            name: 'ammount',
+            name: 'amount',
             label: 'Amount'
         },
         {
@@ -60,7 +78,7 @@ const Withdrawal = () => {
             name: 'status',
             label: 'Status',
             render: (row, id) => {
-                return(
+                return (
                     <Chip
                         label={
                             row['status'] &&
@@ -75,8 +93,8 @@ const Withdrawal = () => {
                                 row['status'] === "initiated"
                                     ? "orange"
                                     : row['status'] === "accecpted"
-                                    ? "green"
-                                    : 'red',
+                                        ? "green"
+                                        : 'red',
                             color: "#FFF",
                         }}
                     />
@@ -85,9 +103,9 @@ const Withdrawal = () => {
         },
         {
             label: 'Change Status',
-            render: (row, id) =>{
-                return(
-                    <IconButton disabled={row.status !== 'initiated'}  color="primary" aria-label="upload picture" component="span" key={id} onClick={(e)=>handleClick(e, row)}>
+            render: (row, id) => {
+                return (
+                    <IconButton disabled={row.status !== 'initiated'} color="primary" aria-label="upload picture" component="span" key={id} onClick={(e) => handleClick(e, row)}>
                         <DriveFileRenameOutlineIcon />
                     </IconButton>
                 )
@@ -102,21 +120,21 @@ const Withdrawal = () => {
         //     headers: { 'Content-Type': 'application/json' },
         //     body: JSON.stringify({status})
         // })
-        fetch(process.env.REACT_APP_API_HOST+`/withdrawalRequests/status/${data._id}`, {
+        fetch(process.env.REACT_APP_API_HOST + `/withdrawalRequests/status/${data._id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({status})
+            body: JSON.stringify({ status })
         })
             .then((response) => {
                 if (response.status === 201 || response.status === 200) {
                     const index = rows.findIndex(object => {
                         return object._id === data._id;
-                      });
-                      
-                      if (index !== -1) {
+                    });
+
+                    if (index !== -1) {
                         (rows[index].status = status);
                         setSuccessMsg('Success')
-                      }
+                    }
                 } else {
                     console.log('error')
                 }
@@ -126,12 +144,12 @@ const Withdrawal = () => {
             })
     }
 
-    useEffect(()=>{setRows(rows)},[successMsg])
+    useEffect(() => { setRows(rows) }, [successMsg])
 
-    if(withdrawalsLoading) return 'Loading...'
-    return(
+    if (withdrawalsLoading) return 'Loading...'
+    return (
         <React.Fragment>
-            <DataTable 
+            <DataTable
                 rows={rows}
                 columns={columns}
                 tableHeading='Withdrawal Requests'
@@ -145,42 +163,42 @@ const Withdrawal = () => {
                 onClose={handleClose}
                 onClick={handleClose}
                 PaperProps={{
-                elevation: 0,
-                sx: {
-                    overflow: 'visible',
-                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                    mt: 1.5,
-                    '& .MuiAvatar-root': {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
+                    elevation: 0,
+                    sx: {
+                        overflow: 'visible',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 1.5,
+                        '& .MuiAvatar-root': {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
+                        },
+                        '&:before': {
+                            content: '""',
+                            display: 'block',
+                            position: 'absolute',
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: 'background.paper',
+                            transform: 'translateY(-50%) rotate(45deg)',
+                            zIndex: 0,
+                        },
                     },
-                    '&:before': {
-                    content: '""',
-                    display: 'block',
-                    position: 'absolute',
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: 'background.paper',
-                    transform: 'translateY(-50%) rotate(45deg)',
-                    zIndex: 0,
-                    },
-                },
                 }}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-        
-                <MenuItem onClick={(e)=>handleSubmit(e,'accecpted')}>
+
+                <MenuItem onClick={(e) => handleSubmit(e, 'accecpted')}>
                     <ListItemIcon>
                         <HandshakeIcon fontSize="small" />
                     </ListItemIcon>
                     Accepted
                 </MenuItem>
-                <MenuItem onClick={(e)=>handleSubmit(e,'denied')}>
+                <MenuItem onClick={(e) => handleSubmit(e, 'denied')}>
                     <ListItemIcon>
                         <CancelIcon fontSize="small" />
                     </ListItemIcon>

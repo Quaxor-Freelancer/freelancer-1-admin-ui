@@ -14,7 +14,7 @@ function Ban({ row }) {
         };
         const body = JSON.stringify({ banned: value });
         const response = await (
-            await customFetch(`/user/ban/${row._id}`, {
+            await customFetch(`/users/ban/${row._id}`, {
                 method: "PUT",
                 headers,
                 body,

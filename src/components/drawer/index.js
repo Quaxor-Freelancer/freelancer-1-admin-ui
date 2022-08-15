@@ -157,7 +157,7 @@ function CustomDrawer(props) {
                             sx={{ width: '100%' }}
                         >
                             <Typography variant='h5' >
-                                SOCIAL APP
+                                ADMIN
                             </Typography>
                         </Stack>
                     </DrawerHeader>

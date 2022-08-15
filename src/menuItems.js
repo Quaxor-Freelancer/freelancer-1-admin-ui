@@ -4,11 +4,6 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 
 const MenuItems = [
     {
-        title: 'Dashboard',
-        to: 'dashboard',
-        icon: <DashboardIcon />
-    },
-    {
         title: 'Users',
         to: 'users',
         icon: <GroupIcon />

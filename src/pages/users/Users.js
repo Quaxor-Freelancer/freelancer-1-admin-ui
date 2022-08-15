@@ -58,14 +58,14 @@ const columns = [
 ];
 
 const Users = () => {
-    const [users, usersLoading] = useFetch(`/user`);
+    const [users, usersLoading] = useFetch(`/users`);
 
     if (usersLoading) return "Loading...";
     return (
         <DataTable
             rows={users}
             columns={columns}
-            tableHeading="Jobs"
+            tableHeading="Users"
             searchLabel="Search title..."
         />
     );

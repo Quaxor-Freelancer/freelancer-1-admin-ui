@@ -72,7 +72,7 @@ const SignIn = () => {
             setSubmitting(true)
             login(values.email, values.password, values.rememberMe)
                 .then(() => {
-                    navigate('/dashboard', { replace: true });
+                    navigate('/', { replace: true });
                 })
                 .catch(error => {
                     setErr('invalid credentials')
@@ -138,19 +138,7 @@ const SignIn = () => {
                     >
                         Sign In
                     </Button>
-                    <Grid
-                        container
-                        direction="row"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        <Grid item>
-                            <Link to="/auth/signup" variant="body2">
-                                Don't have an account? Sign Up
-                            </Link>
-                        </Grid>
-                    </Grid>
-                    <Grid
+                    {/* <Grid
                         container
                         direction="row"
                         justifyContent="center"
@@ -161,7 +149,7 @@ const SignIn = () => {
                                 Forgot password?
                             </Link>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
 
                 </Box>
             </FormikProvider>
